@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using GSql = eTexAPI.Data.GlobalSql;
 using GOpeSql = eTexAPI.Data.OperationSql;
 using EncD = DhKaalPs.EncDec.EncDecAlg;
-
+using System.Globalization;
 
 namespace eTexAPI.Data
 
@@ -1596,7 +1596,20 @@ namespace eTexAPI.Data
             StrRetVal = Convert.ToInt32(ExeScal(ServerConn, "Sp_FindNewId", OperationSql.GetParams()) + "");
             return StrRetVal + 1;
         }
-
+       
+        public static DateTime? DTDBDate(String pStrDateTime)
+        {
+            CultureInfo CI1 = new CultureInfo("en-GB");
+            if (pStrDateTime == null || pStrDateTime == "")
+            {
+                DateTime? DT = null;
+                return DT;
+            }
+            else
+            {
+                return DateTime.Parse(pStrDateTime, CI1);
+            }
+        }
         /// <summary>Finds Text From A Given TableName With Criteria
         /// And Returns Search String
         /// </summary>
@@ -1632,7 +1645,7 @@ namespace eTexAPI.Data
         /// </summary>
         /// <param name="pStrDate">Date String</param>
         /// <returns>String</returns>
-        private static string SqlDate(string pStrDate)
+        public static string SqlDate(string pStrDate)
         {
             if (pStrDate.Length == 0)
             {
