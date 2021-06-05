@@ -51,10 +51,12 @@
   <ItemGroup>
     <Compile Include="Common\DapperHelper.cs" />
     <Compile Include="Common\IDapperHelper.cs" />
+    <Compile Include="Model\GlbClass.cs" />
     <Compile Include="Model\clsSaleOrder.cs" />
     <Compile Include="Model\AttTrn.cs" />
     <Compile Include="Model\Setting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\GlbServices.cs" />
     <Compile Include="Services\SaleOrderServices.cs" />
     <Compile Include="Services\FillComboServices.cs" />
     <Compile Include="Services\etexServices.cs" />

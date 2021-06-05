@@ -1,10 +1,10 @@
 ﻿1) Global Company Select : /Glb/CompSel?int mfg
 2) Sale Order
-	i)view : /saleorder/view?int mfg & int ycode & string status & string fdate & string tdate
-	ii)Combos : /SaleOrder/CmbFill
-	ii)Combos in L entry : /SaleOrder/CmbFillItem?string icat
-	iii)New OrdNo : /saleorder/newordno?int mfg=1 & int ycode=1
-	iv)HSave : SaleOrder/HSave	
+	2.1)view : /saleorder/view?int mfg & int ycode & string status & string fdate & string tdate
+	2.2)Combos : /SaleOrder/CmbFill
+	2.3)Combos in L entry : /SaleOrder/CmbFillItem?string icat
+	2.4)New OrdNo : /saleorder/newordno?int mfg=1 & int ycode=1
+	2.5)HSave : SaleOrder/HSave	
 			{	
 				"MfgUnit":2,
 				"YCode"	:4,
@@ -21,7 +21,7 @@
 				"OrderStatus":"-",
 				"IUser":"ADMIN"
 			}
-	v)LSave: SaleOrder/LSave
+	2.5)LSave: SaleOrder/LSave
 			{
 			"MfgUnit":2,
 			"YCode"  :4,
@@ -40,4 +40,17 @@
 			"IGSTAmt":0,
 			"SGSTAmt":828,
 			"CGSTAmt":828			
+			}
+	2.7)EmailProfiledata : http://localhost:49203/api/glb/emailprofile
+	2.8)getNewMsgLogID : http://localhost:49203/api/glb/NewMsgLogId
+	2.9)MsgLogSave : http://localhost:49203/api/glb/MsgLogSave
+			{
+			"LogID":4, 
+			"LogWp":1, 
+			"LogMail":1,
+			"LogBrok":1,
+			"LogParty":1,
+			"FormType":"a",
+			"FormKey":"b",
+			"IUser":"ADMIN"
 			}

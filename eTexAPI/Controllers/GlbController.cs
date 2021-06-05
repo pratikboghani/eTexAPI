@@ -15,9 +15,11 @@ namespace eTexAPI.Controllers
     public class GlbController: ApiController
     {
         private FillComboServices _FillCmpSel = new FillComboServices();
+        private FillComboServices _EmailProfile = new FillComboServices();
+        private GlbServices _MSGLOG = new GlbServices();
         #region Company Select
         //---------------------------------Company Select-------------------------------------//
-        [System.Web.Http.Route("Glb/CompSel")]
+        [System.Web.Http.Route("api/Glb/CompSel")]
         [System.Web.Http.HttpGet]
         public IHttpActionResult CompSel(int mfg)
         {
@@ -37,6 +39,62 @@ namespace eTexAPI.Controllers
                 return NotFound();
             }
             return Ok(_FillCmpSel.DS);
+        }
+        #endregion
+
+        #region EmailProfile
+        //---------------------------------WhatsApp Password & Email-------------------------------------//
+        [System.Web.Http.Route("api/Glb/EmailProfile")]
+        [System.Web.Http.HttpGet]
+        public IHttpActionResult EmailProfile()
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            _EmailProfile.TableName = "EMAILPROFILE";
+            _EmailProfile.Fill();
+
+            if (_EmailProfile.DS == null)
+            {
+                return NotFound();
+            }
+            return Ok(_EmailProfile.DS);
+        }
+        #endregion
+
+        #region EmailProfile
+        //---------------------------------WhatsApp & Email msg Log-------------------------------------//
+        [System.Web.Http.Route("api/Glb/NewMsgLogId")]
+        [System.Web.Http.HttpGet]
+        public IHttpActionResult GetNewNo()
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(_MSGLOG.FindNewMsgLogId());
+        }
+
+        [System.Web.Http.Route("api/Glb/MsgLogSave")]
+        //[ResponseType(typeof(ClsMsg))]
+        [System.Web.Http.HttpPost]
+        public async Task<IHttpActionResult> MsgLogSave(ClsMsg cls)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var x = await _MSGLOG.SaveMsgLog(cls);
+                return Ok(x.ToString());
+
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
         }
         #endregion
     }
